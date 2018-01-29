@@ -4,15 +4,24 @@
 import java.util.*;
 import java.util.concurrent.*;
 
-public class PSort extends RecursiveTask{
+public class PSort extends RecursiveAction{
+	int[] A;
+	int begin, end;
+	
+	public PSort(int[]A, int begin, int end){
+		this.A = A;
+		this.begin = begin;
+		this.end = end;
+	}
+	
   public static void parallelSort (int[] A, int begin, int end){
     // TODO: Implement your parallel sort function 
-	 if(A.length <= 16){
-		 A = insertionSort(A);
-	 }
-	 else{
-		 
-	 }
+	 
+		 int processors = Runtime.getRuntime().availableProcessors();
+		 PSort arr = new PSort(A, begin, end);
+		 ForkJoinPool pool = new ForkJoinPool(processors);
+		 pool.invoke(arr);
+
   }
   
   public static int[] insertionSort(int[] A){  //TODO: why static??
@@ -33,9 +42,13 @@ public class PSort extends RecursiveTask{
 
 
   @Override
-  protected Object compute() {
-	  // TODO Auto-generated method stub
-	  return null;
+  protected void compute() {
+	  if(A.length <= 16){
+			 A = insertionSort(A);
+	  }
+	  else{
+		  
+	  }
   }
   
 }
