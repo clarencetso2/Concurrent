@@ -43,13 +43,13 @@ public class PSort extends RecursiveAction{
 
   @Override
   protected void compute() {
-	  if(A.length <= 4){
+	  if(A.length <= 0){
 		  insertionSort(A);
 	  }
 	  else{
 		  if(begin<end){
 			  int index = partition(A, begin, end);
-			  PSort lower = new PSort(A, begin, index-1);
+			  PSort lower = new PSort(A, begin, index);
 			  lower.fork();
 			  PSort upper = new PSort(A, index+1, end);
 			  upper.fork();
@@ -60,10 +60,7 @@ public class PSort extends RecursiveAction{
   }
   
   public int partition(int[] arr, int low, int high){
-	  for(int i = 0; i < high; i++)
-		  System.out.print(arr[i]+" ");
-	  
-	  System.out.println();
+	
 	  int pivot=0;
 	  pivot = arr[high-1];
 	  int wall = low-1;
