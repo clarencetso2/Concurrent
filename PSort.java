@@ -62,11 +62,13 @@ public class PSort extends RecursiveAction{
   public int partition(int[] arr, int low, int high){
 	  for(int i = 0; i < high; i++)
 		  System.out.print(arr[i]+" ");
+	  
 	  System.out.println();
 	  int pivot=0;
 	  pivot = arr[high-1];
 	  int wall = low-1;
-	  for(int current = low; current < high; current++){
+	  
+	  for(int current = low; current < high-1; current++){
 		  if(arr[current]<=pivot){
 			  wall++;
 			  
@@ -75,8 +77,9 @@ public class PSort extends RecursiveAction{
 			  arr[current] = temp;
 		  }
 	  }
+	  
 	  int temp = arr[wall+1];
-	  arr[wall+1] = pivot;
+	  arr[wall+1] = arr[high-1];
 	  arr[high-1]=temp;
 	  
 	  return wall+1;
