@@ -43,7 +43,7 @@ public class PSort extends RecursiveAction{
 
   @Override
   protected void compute() {
-	  if(A.length <= 0){
+	  if(A.length <= 16){
 		  insertionSort(A);
 	  }
 	  else{
