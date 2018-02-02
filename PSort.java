@@ -43,7 +43,8 @@ public class PSort extends RecursiveAction{
 
   @Override
   protected void compute() {
-	  if(A.length <= 16){
+	  if(end - begin <= 16){
+		  System.out.println("insert penis");
 		  insertionSort(A);
 	  }
 	  else{
@@ -52,9 +53,9 @@ public class PSort extends RecursiveAction{
 			  PSort lower = new PSort(A, begin, index);
 			  lower.fork();
 			  PSort upper = new PSort(A, index+1, end);
-			  upper.fork();
+			  upper.compute();
 			  lower.join();
-			  upper.join();
+			 
 		  }
 	  }
   }

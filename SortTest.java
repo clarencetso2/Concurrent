@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.Random;
+
 
 public class SortTest {
   public static void main (String[] args) {
@@ -11,12 +13,20 @@ public class SortTest {
     int[] A3 = {13, 59, 24, 18, 33, 20, 11, 11, 13, 50, 10999, 97};
     verifyParallelSort(A3);
     
-    int[] A4 = new int[32];
-    for(int i = 0; i < A4.length; i++) {
-      A4[i] = (int) Math.floor(Math.random() * 100);
+    int ar[];
+    Random rand = new Random();
+    for (int i = 9000; i < 10000; i++) {
+    	ar = new int[i];
+
+    	//populate array with random values
+    	for (int j = 0; j < i; j++) {
+    		
+    		ar[j] = rand.nextInt(10000);
+    	}
+    	verifyParallelSort(ar);
     }
     
-    verifyParallelSort(A4);
+    
 
   }
 
