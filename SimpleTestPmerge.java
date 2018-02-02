@@ -2,13 +2,18 @@ import java.util.Arrays;
 
 public class SimpleTestPmerge {
   public static void main (String[] args) {
-    int[] A1 = {1, 3, 5, 7, 9};
+   /*
+	int[] A1 = {1, 3, 5, 7, 9};
     int[] B1 = {2, 4, 6, 8, 10};
     verifyParallelMerge(A1, B1);
     
     int[] A2 = {13, 60, 1000, 3000, 129948};
     int[] B2 = {1, 2, 3, 5, 10};
     verifyParallelMerge(A2, B2);
+    */
+    int[] A3 = {13, 60, 1000, 1000, 3000, 129948};
+    int[] B3 = {1, 2, 3, 5, 10, 1000, 1000,};
+    verifyParallelMerge(A3, B3);
   }
 
   static void verifyParallelMerge(int[] A, int[] B) {
@@ -37,7 +42,8 @@ public class SimpleTestPmerge {
     }
 
     if (isSuccess) {
-      System.out.println("Great, your sorting algorithm works for this test case");
+    	printArray(D);
+    	System.out.println("Great, your sorting algorithm works for this test case");
     }
     System.out.println("=========================================================");
   }

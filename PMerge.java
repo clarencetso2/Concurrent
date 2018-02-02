@@ -23,18 +23,7 @@ public class PMerge implements Callable<Void>{
 		this.endB = endB;
 	}
 	public static void parallelMerge(int[] A, int[] B, int[]C, int numThreads){
-		HashSet<Integer> temp = new HashSet<Integer>();
-		
-		for(int i = 0; i < A.length; i++){
-			temp.add(A[i]);
-		}
-		
-		for(int j = 0; j < B.length; j++){
-			if(!temp.add(B[j])){
-				duplicate.add(B[j]);
-			}
-		}
-		
+			
 		int sizeA = A.length/numThreads;
 		int sizeB = B.length/numThreads;
 		if(A.length <= numThreads){
@@ -87,7 +76,9 @@ public class PMerge implements Callable<Void>{
 		
 	}
 	
-	public int binarySearch(int key, int[] arr){
+	public int binarySearch(int key, int index,int[] arr, int origin){
+		//to break ties, put down all the ties in A first, then in B
+		//origin A = 0; origin B = 1
 		int low = 0;
 		int hi = arr.length - 1;
 		int numLower=0;
@@ -95,6 +86,13 @@ public class PMerge implements Callable<Void>{
 		for(int i =0; i< arr.length; i++){
 			if(arr[i] < key){
 				numLower++;
+			}
+			if(arr[i] == key){
+				if(origin == 1){
+					numLower++;
+										
+				}
+								
 			}
 		}
 		return numLower;
@@ -124,8 +122,8 @@ public class PMerge implements Callable<Void>{
 
 	@Override
 	public Void call() throws Exception {
-		for(int i = startA; i <= endA; i++){
-			int cIndex = i + binarySearch(A[i], B);
+		for(int i = startA; i>=0 && i <= endA; i++){
+			int cIndex = i + binarySearch(A[i], i, B, 0);
 			/*
 			if(duplicate.contains(A[i])){
 				cIndex++;
@@ -133,8 +131,8 @@ public class PMerge implements Callable<Void>{
 			*/
 			C[cIndex] = A[i];
 		}
-		for(int j = startB; j <= endB; j++){
-			int cIndex = j + binarySearch(B[j], A);
+		for(int j = startB; j >= 0 && j <= endB; j++){
+			int cIndex = j + binarySearch(B[j], j, A, 1);
 			C[cIndex] = B[j];
 		}
 		return null;
