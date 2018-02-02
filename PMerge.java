@@ -40,8 +40,12 @@ public class PMerge implements Callable<Void>{
 		int B_end = 0;
 		Future<Void>[] futures = (Future<Void>[]) new Future[numThreads];
 		for(int i = 1; i <= numThreads; i++){
+			if(i == numThreads && A.length - sizeA*(i) > 0){
+				A_beg = sizeA*(i-1);
+				A_end = A.length -1;
+			}
 			
-			if(A.length - sizeA*(i) >=0){
+			else if(A.length - sizeA*(i) >=0){
 				A_beg = sizeA*(i-1);
 				A_end = sizeA*(i) -1;
 				
@@ -51,7 +55,12 @@ public class PMerge implements Callable<Void>{
 				A_end = -1;
 			}
 			
-			if(B.length - sizeB*(i) >= 0){
+			if(i == numThreads && B.length - sizeB*(i) > 0){
+				B_beg = sizeB*(i-1);
+				B_end = B.length -1;
+			}
+			
+			else if(B.length - sizeB*(i) >= 0){
 				B_beg = sizeB*(i-1);
 				B_end = sizeB*(i) -1;
 			}
@@ -124,11 +133,6 @@ public class PMerge implements Callable<Void>{
 	public Void call() throws Exception {
 		for(int i = startA; i>=0 && i <= endA; i++){
 			int cIndex = i + binarySearch(A[i], i, B, 0);
-			/*
-			if(duplicate.contains(A[i])){
-				cIndex++;
-			}
-			*/
 			C[cIndex] = A[i];
 		}
 		for(int j = startB; j >= 0 && j <= endB; j++){

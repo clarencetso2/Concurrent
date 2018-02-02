@@ -11,8 +11,8 @@ public class SimpleTestPmerge {
     int[] B2 = {1, 2, 3, 5, 10};
     verifyParallelMerge(A2, B2);
     */
-    int[] A3 = {13, 60, 1000, 1000, 3000, 129948};
-    int[] B3 = {1, 2, 3, 5, 10, 1000, 1000,};
+    int[] A3 = {13, 60, 1000, 1000, 3000, 3000, 129948};
+    int[] B3 = {1, 2, 3, 5, 10, 1000, 1000, 2000, 2000};
     verifyParallelMerge(A3, B3);
   }
 
@@ -26,7 +26,7 @@ public class SimpleTestPmerge {
 	printArray(B);
     merge(A, B, C);
 
-    PMerge.parallelMerge(A, B, D, 10);
+    PMerge.parallelMerge(A, B, D, 2);
    	
     boolean isSuccess = true;
     for (int i = 0; i < C.length; i++) {
