@@ -75,9 +75,9 @@ public class PMerge implements Callable<Void>{
 			
 		}
 		
-		for(int i = 0; i < numThreads; i++){
+		for(int a = 0; a < numThreads; a++){
 			try {
-				futures[i].get();
+				futures[a].get();
 			} catch (InterruptedException | ExecutionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
