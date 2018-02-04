@@ -24,9 +24,9 @@ public class PSort extends RecursiveAction{
 
   }
   
-  public static int[] insertionSort(int[] A){  //TODO: why static??
+  public static int[] insertionSort(int[] A, int begin, int length){  //TODO: why static??
 	  int size = A.length;
-	  for(int i = 1; i < size; ++i){
+	  for(int i = begin; i < length; ++i){
 		  int temp = A[i];
 		  int j = i-1;
 		  
@@ -44,8 +44,7 @@ public class PSort extends RecursiveAction{
   @Override
   protected void compute() {
 	  if(end - begin <= 16){
-		  System.out.println("insert penis");
-		  insertionSort(A);
+		  insertionSort(A, begin, end);
 	  }
 	  else{
 		  if(begin<end){

@@ -40,6 +40,7 @@ public class PMerge implements Callable<Void>{
 		int B_end = 0;
 		Future<Void>[] futures = (Future<Void>[]) new Future[numThreads];
 		for(int i = 1; i <= numThreads; i++){
+			//if last thread, take remainder of the work
 			if(i == numThreads && A.length - sizeA*(i) > 0){
 				A_beg = sizeA*(i-1);
 				A_end = A.length -1;
